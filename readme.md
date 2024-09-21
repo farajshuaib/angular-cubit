@@ -1,27 +1,123 @@
-# AngularCubit
+# Angular Cubit-Like State Management
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
+## Overview
+This library provides a lightweight and intuitive state management solution for Angular applications, inspired by Flutter's Cubit. It leverages RxJS for reactivity and ensures type-safe state handling with immutability through a copyWith method. Ideal for developers seeking a streamlined approach to managing state without the overhead of more complex libraries.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prerequisites
+- Angular: Ensure users have Angular installed.
+- RxJS: Mention any specific RxJS features or versions required.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Install the package via npm:
 
-## Running unit tests
+```bash
+npm install angular-cubit
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install the package via yarn:
 
-## Running end-to-end tests
+```bash
+yarn add angular-cubit
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Usage
 
-## Further help
+### Create a State Implementation
+Implement the state interface with a copyWith method:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```typescript
+import {State} from "angular-cubit";
+
+export class CounterState implements State<CounterState> {
+  count: number;
+
+  constructor(count: number = 0) {
+    this.count = count;
+  }
+}
+```
+
+### Create a Cubit
+Create a Cubit class that extends `Cubit`:
+Extend the Cubit class to create a specific cubit:
+
+
+```typescript
+import { Injectable } from "@angular/core";
+import { CounterState } from "./CounterState";
+import {Cubit} from "angular-cubit";
+
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CounterCubit extends Cubit<CounterState> {
+  constructor() {
+    super(new CounterState());
+  }
+
+  increment() {
+    this.emit(this.copyWith({ count: this.state.count + 1 }));
+  }
+
+  decrement() {
+    this.emit(this.copyWith({ count: this.state.count - 1 }));
+  }
+}
+```
+
+
+### Use the Cubit in a Component
+Inject the cubit into a component and bind to its state:
+
+```typescript
+@Component({
+  selector: 'app-counter',
+  templateUrl: './counter.component.html',
+  styleUrls: ['./counter.component.css'],
+  standalone: true
+})
+export class CounterComponent {
+  constructor(protected counterCubit: CounterCubit) {}
+
+  increment() {
+    this.counterCubit.increment();
+  }
+
+  decrement() {
+    this.counterCubit.decrement();
+  }
+
+  get count() {
+    return this.counterCubit.state.count;
+  }
+}
+```
+
+```html
+<div class="container">
+  <button class="btn" (click)="decrement()">-</button>
+  <span class="count">{{ count }}</span>
+  <button class="btn" (click)="increment()">+</button>
+</div>
+```
+
+## Contributing
+
+Invite users to contribute to the project. Include guidelines for:
+
+- Forking the repository
+- Cloning the repository
+- Adding a new feature
+- Submitting pull requests
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
