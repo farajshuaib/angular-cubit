@@ -1,0 +1,25 @@
+{
+  "name": "angular-cubit",
+  "version": "0.0.1",
+  "description": "A state management library for angular applications inspired by the BLoC pattern.",
+  "peerDependencies": {
+    "@angular/common": "^18.2.0",
+    "@angular/core": "^18.2.0"
+  },
+  "keywords": [
+    "typescript",
+    "bloc",
+    "state-management"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/farajshuaib/angular-cubit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farajshuaib/angular-cubit.git"
+  },
+  "author": "Faraj Shuaib",
+  "dependencies": {
+    "tslib": "^2.7.0"
+  },
+  "sideEffects": false
+}

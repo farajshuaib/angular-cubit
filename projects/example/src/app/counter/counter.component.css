@@ -1,0 +1,39 @@
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.btn {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+
+.count{
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+
