@@ -1,0 +1,41 @@
+{
+  "name": "cubit-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "typescript",
+    "cubit",
+    "state-management"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "homepage": "https://github.com/farajshuaib/cubit-ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farajshuaib/cubit-ts.git"
+  },
+  "author": "Faraj Shuaib",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/node": "^20.14.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "cubit-ts": "file:",
+    "ts-node": "^10.9.2"
+  }
+}
