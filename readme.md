@@ -1,4 +1,4 @@
-# Angular Cubit-Like State Management
+# Angular Cubit State Management
 
 ## Overview
 This library provides a lightweight and intuitive state management solution for Angular applications, inspired by Flutter's Cubit. It leverages RxJS for reactivity and ensures type-safe state handling with immutability through a copyWith method. Ideal for developers seeking a streamlined approach to managing state without the overhead of more complex libraries.
