@@ -19,7 +19,6 @@
   },
   "author": "Faraj Shuaib",
   "dependencies": {
-    "angular-cubit": "file:",
     "tslib": "^2.7.0"
   },
   "sideEffects": false
