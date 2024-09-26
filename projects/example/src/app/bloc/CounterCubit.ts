@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
-import { CounterState } from "./CounterState";
+import {Injectable} from "@angular/core";
+import {CounterState} from "./CounterState";
 import {Cubit} from "angular-cubit";
-
 
 
 @Injectable({
@@ -13,10 +12,20 @@ export class CounterCubit extends Cubit<CounterState> {
   }
 
   increment() {
-    this.emit(this.copyWith({ count: this.state.count + 1 }));
+    this.emit({count: this.state.count + 1});
   }
 
   decrement() {
-    this.emit(this.copyWith({ count: this.state.count - 1 }));
+    this.emit({count: this.state.count - 1});
+  }
+
+  reset() {
+    this.emit({count: 0});
+  }
+
+  watchCount() {
+    this.watch(() => {
+      console.log("count changed to: ", this.state.count);
+    }, ["count"]);
   }
 }

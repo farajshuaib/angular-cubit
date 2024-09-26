@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CounterCubit } from '../bloc/CounterCubit';
+import {Component, OnInit} from '@angular/core';
+import {CounterCubit} from '../bloc/CounterCubit';
 
 @Component({
   selector: 'app-counter',
@@ -7,8 +7,13 @@ import { CounterCubit } from '../bloc/CounterCubit';
   styleUrls: ['./counter.component.css'],
   standalone: true
 })
-export class CounterComponent {
-  constructor(protected counterCubit: CounterCubit) {}
+export class CounterComponent implements OnInit {
+  constructor(protected counterCubit: CounterCubit) {
+  }
+
+  ngOnInit(): void {
+    this.counterCubit.watchCount();
+  }
 
   increment() {
     this.counterCubit.increment();

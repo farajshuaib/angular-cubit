@@ -1,5 +1,5 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { State } from './State';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {State} from './State';
 
 export class Cubit<T extends State<T>> {
   private stateSubject: BehaviorSubject<T>;
@@ -17,13 +17,29 @@ export class Cubit<T extends State<T>> {
   }
 
   protected emit(newState: T): void {
-    this.stateSubject.next(newState);
+    this.stateSubject.next({
+      ...this.state,
+      ...newState
+    });
   }
 
-  protected copyWith(changes: Partial<T>): T {
-    return {
-      ...this.state,
-      ...changes,
-    };
+
+  public watch(callback: () => void, dependencies: (keyof T)[]): () => void {
+    // watch dependencies changes and call the method when one or more dependency changes
+    const subscriptions: Subscription[] = [];
+    dependencies.forEach((dependency) => {
+      subscriptions.push(
+        this.state$.subscribe((state) => {
+          if (state[dependency] !== this.state[dependency]) {
+            callback();
+          }
+        })
+      );
+    });
+
+    // unsubscribe when the component is destroyed
+    return () => {
+      subscriptions.forEach((subscription) => subscription.unsubscribe());
+    }
   }
 }
